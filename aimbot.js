@@ -1,12 +1,12 @@
-﻿var extern = function() {
-    var intervl = 0;
+
+    var interval = 0;
     var active = false;
     
     function activate(event) {
         event.preventDefault();
         if (event.keyCode === 16 && !active) {
             active = true;
-            intervl = setInterval(aimClosestPlayer, 10);
+            interval = setInterval(aimClosestPlayer, 10);
         }
     }
 
@@ -15,13 +15,13 @@
         if (event.keyCode === 16) {
             active = false;
             clearInterval(intervl);
-            intervl = 0;
+            interval = 0;
         }
     }
     
     function aimClosestPlayer(){
         var distance = 1000;
-        var cloestPlayer;
+        var closestPlayer;
         var player;
         var d;
         for(var i = 0; i < players.length; i++){
@@ -31,15 +31,15 @@
                 d = Math.sqrt(Math.pow(me.x - player.x, 2) + Math.pow(me.y - player.y, 2) + Math.pow(me.z - player.z, 2));
                 if (d < distance){
                     distance = d;
-                    cloestPlayer = player;
+                    closestPlayer = player;
                 }
             }
             }
         }
    
-        var dX = cloestPlayer.x - me.x;
-        var dY = cloestPlayer.y - me.y;
-        var dZ = cloestPlayer.z - me.z;
+        var dX = closestPlayer.x - me.x;
+        var dY = closestPlayer.y - me.y;
+        var dZ = closestPlayer.z - me.z;
 
         var yaw = Math.atan2(dX,dZ);
         var pitch = Math.sin(dY/distance);
